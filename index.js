@@ -18,22 +18,43 @@ $(document).ready(function () {
           throw new Error(response.statusText);
       })
       .then(responseJson => displayResults(responseJson))
-      .catch(error => 
-        $('#js-error-message').text(`Invalid entry: ${error.message}`));
+      .catch(error => {
+        removeCurrentResults();
+        hideResults();
+        $('#js-error-message').text(`Invalid entry: ${error.message}`);
+      });
   }
 
   function displayResults(response) {
     console.log(response); 
+    removeCurrentResults();
+    noResultsText(response);
+
+    for (let i = 0; i < response.length; i++) {
+
+      $('.results').append(
+        `<li>
+          <a href="${response[i].clone_url}">${response[i].name}</a>
+        </li>`
+      )} 
+
+    $('section').removeClass('hidden'); 
   }
-  // https://api.github.com/users/:username/repos
-  // Get into: feed value to function that adds it to search url
-    // may need to format handle
-    // create const options for api key--if needed 
-    // fetch info accouting for possible errors with .catch and 
-      // response.ok
-  // display results
-    // remove anything appended to .results
-    // append findings: repo name and link to repo url 
 
+  function removeCurrentResults() {
+    $('#js-error-message').empty();
+    $('.results').empty(); 
+  }
 
+  function noResultsText(response) {
+    if (response.length < 1) {
+      $('.results').append(
+        `<li class="no_repo">This handle has no repos</li>`
+    )}
+    $('section').removeClass('hidden');
+  }
+
+  function hideResults() {
+    $('section').addClass('hidden');
+  }
 });
