@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Search for repos or repositories on Github">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Github repo finder</title>
+  <link rel="stylesheet" href="index.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<body>
+  <header>
+    <h1>Find Github Repos</h1>
+  </header>
+
+  <form>
+    <label for="handle">Enter Github handle</label>
+    <input type="text" name="handle" placeholder="handle" id="js-handle"> 
+    <input type="submit"> 
+  </form>
+
+  <p id="js-error-message" class="error_message"></p>
+  <section class="hidden">
+    <header>
+      <h2>Search results</h2>
+    </header>
+    <ul class="results">
+    </ul>
+  </section>
+  <script type="text/javascript" src="index.js"></script>
+</body>
+</html>
